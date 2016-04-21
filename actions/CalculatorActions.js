@@ -2,10 +2,10 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
     CalculatorConstants = require('../constants/CalculatorConstants'),
 
     CalculatorActions = {
-        evalWeights (totalWeight) {
+        evalWeights (weightState) {
             AppDispatcher.dispatch({
                 actionType: CalculatorConstants.EVAL_WEIGHTS,
-                totalWeight: totalWeight
+                weightState: weightState
             })
         }
     };

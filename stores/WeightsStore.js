@@ -5,10 +5,14 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
     events = new EventEmitter(),
     CHANGE_EVENT = 'CHANGE',
 
-    _currentTotalWeight = 0,
+    _currentWeightStates = {
+        totalWeight: 0,
+        bbWeight: 45
+    },
 
-    updateTotalWeight = (totalWeight) => {
-        _currentTotalWeight = totalWeight
+    updateWeightStates = (weightState) => {
+        _currentWeightStates.totalWeight = parseFloat(weightState.totalWeight);
+        _currentWeightStates.bbWeight = parseFloat(weightState.bbWeight);
     },
 
     WeightsStore = {
@@ -24,15 +28,15 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
             events.removeListener(CHANGE_EVENT, callback);
         },
 
-        getTotalWeight () {
-            return _currentTotalWeight;
+        getWeightStates () {
+            return _currentWeightStates;
         }
     };
 
 AppDispatcher.register((action) => {
     switch(action.actionType) {
         case CalculatorConstants.EVAL_WEIGHTS:
-            updateTotalWeight(action.totalWeight);
+            updateWeightStates(action.weightState);
             WeightsStore.emit();
             break;
 

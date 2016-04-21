@@ -85,3 +85,17 @@ html {
         .calculation-messaging__result:after {
             content: ' (lbs)';
         }
+
+.property {
+    display: table;
+    margin: 0 auto 15px;
+}
+
+    .property label {
+        display: table-cell;
+        width: 200px;
+    }
+
+    .property .value {
+        display: table-cell;
+    }

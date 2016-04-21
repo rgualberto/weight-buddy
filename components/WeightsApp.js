@@ -5,8 +5,11 @@ var React = require('react'),
 
     WeightsApp = React.createClass({
         getInitialState () {
+            weightStates = WeightsStore.getWeightStates();
+
             return {
-                totalWeight: WeightsStore.getTotalWeight()
+                totalWeight: weightStates.totalWeight,
+                bbWeight: weightStates.bbWeight
             }
         },
 
@@ -19,8 +22,11 @@ var React = require('react'),
         },
 
         handleStoreChange () {
+            weightStates = WeightsStore.getWeightStates();
+
             this.setState({
-                totalWeight: WeightsStore.getTotalWeight()
+                totalWeight: weightStates.totalWeight,
+                bbWeight: weightStates.bbWeight
             });
         },
 
@@ -28,7 +34,10 @@ var React = require('react'),
             return (
                 <div className="calculator">
                     <CalculatorForm />
-                    <Calculation totalWeight={this.state.totalWeight} />
+                    <Calculation
+                        totalWeight={this.state.totalWeight}
+                        bbWeight={this.state.bbWeight}
+                    />
                 </div>
             );
         }

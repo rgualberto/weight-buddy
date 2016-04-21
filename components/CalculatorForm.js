@@ -5,8 +5,11 @@ var React = require('react'),
 
     Calculator = React.createClass({
         getInitialState () {
+            weightStates = WeightsStore.getWeightStates();
+
             return {
-                totalWeight: WeightsStore.getTotalWeight()
+                totalWeight: weightStates.totalWeight,
+                bbWeight: weightStates.bbWeight
             }
         },
 
@@ -32,7 +35,7 @@ var React = require('react'),
                 event.preventDefault();
             }
 
-            CalculatorActions.evalWeights(parseFloat(this.state.totalWeight));
+            CalculatorActions.evalWeights(this.state);
         },
 
         render () {
@@ -40,14 +43,29 @@ var React = require('react'),
                 <div>
                     <div className="calculator__form">
                         <h2>Calculate Plate Breakdown</h2>
-                        <p>Enter Total Weight (lb)</p>
-                        <input
-                            id="totalWeight"
-                            onChange={this.onTextChange}
-                            onKeyDown={this.onKeyDown}
-                            value={this.state.totalWeight === 0 ? null : this.state.totalWeight}
-                            placeholder={this.state.totalWeight}
-                        />
+                        <div className="property">
+                            <label htmlFor="bbWeight">Enter Barbell Weight (lb): </label>
+                            <div className="value">
+                                <input
+                                    id="bbWeight"
+                                    onChange={this.onTextChange}
+                                    onKeyDown={this.onKeyDown}
+                                    value={this.state.bbWeight}
+                                />
+                            </div>
+                        </div>
+                        <div className="property">
+                            <label htmlFor="totalWeight">Enter Total Weight (lb): </label>
+                            <div className="value">
+                                <input
+                                    id="totalWeight"
+                                    onChange={this.onTextChange}
+                                    onKeyDown={this.onKeyDown}
+                                    value={this.state.totalWeight === 0 ? null : this.state.totalWeight}
+                                    placeholder={this.state.totalWeight}
+                                />
+                            </div>
+                        </div>
                         <a
                             href="#"
                             onClick={this.save}

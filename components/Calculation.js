@@ -3,24 +3,24 @@ var React = require('react'),
 
     Calculation = React.createClass({
         shouldComponentUpdate (nextProps, nextState) {
-            return nextProps.totalWeight !== this.props.totalWeight;
+            var totalChanged = nextProps.totalWeight === this.props.totalWeight,
+                bbChanged = nextProps.bbWeight === this.props.bbWeight;
+
+            return totalChanged || bbChanged;
         },
 
         propTypes: {
-            totalWeight: React.PropTypes.number.isRequired
+            totalWeight: React.PropTypes.number.isRequired,
+            bbWeight: React.PropTypes.number.isRequired
         },
 
         getAvailableWeights () {
             return [45, 35, 25, 10, 5, 2.5];
         },
 
-        getBarWeight () {
-            return 45;
-        },
-
         calculateWeights (totalWeight) {
             var availableWeights = this.getAvailableWeights(),
-                barWeight = this.getBarWeight(),
+                barWeight = this.props.bbWeight,
                 weightWithoutBar = totalWeight - barWeight,
                 finalWeights = [],
                 leftOverWeight = 0,
@@ -64,7 +64,7 @@ var React = require('react'),
         },
 
         getStats (leftOverWeight) {
-            var barWeight = this.getBarWeight(),
+            var barWeight = this.props.bbWeight,
                 calculatedWeight = this.props.totalWeight - leftOverWeight;
 
             return (
