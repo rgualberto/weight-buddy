@@ -20,27 +20,60 @@ html {
     }
 }
 
-.calculator__form input {
-    display: block;
-    margin: 0 auto;
-    padding: 4px;
-    width: 40px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 5px;
-    border: 0;
-}
-.calculator__form a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 4px 10px;
-    color: black;
-    font-size: 18px;
-    text-decoration: none;
-    background: #FFFFFF;
-    border: 3px solid #2B7090;
-    border-radius: 5px;
-}
+.calculator-form {}
+
+    .calculator-form input {
+        display: block;
+        margin: 0 auto;
+        padding: 4px;
+        width: 40px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 5px;
+        border: 0;
+    }
+
+    .calculator-form a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 4px 10px;
+        color: black;
+        font-size: 18px;
+        text-decoration: none;
+        background: #FFFFFF;
+        border: 3px solid #2B7090;
+        border-radius: 5px;
+    }
+
+    .calculator-form__allowed-wieghts {
+        display: block;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 700px) {
+        .calculator-form__allowed-wieghts {
+            width: 400px;
+        }
+    }
+
+    .calculator-form__allowed-wieghts:before,
+    .calculator-form__allowed-wieghts:after {
+        display: table;
+        content: ' ';
+    }
+
+    .calculator-form__allowed-wieghts:after {
+        clear: both;
+    }
+
+        .calculator-form__allowed-wieghts p {
+            margin-top: 0;
+        }
+
+        .calculator-form__allowed-wieghts .property {
+            width: 33.33%;
+            float: left;
+        }
 
 .calculation-list {
     padding: 0;

@@ -2,6 +2,7 @@ var React = require('react'),
     isEmpty = require('lodash/fp/isEmpty'),
     CalculatorActions = require('../actions/CalculatorActions'),
     WeightsStore = require('../stores/WeightsStore'),
+    forEach = require('lodash/forEach'),
 
     Calculator = React.createClass({
         getInitialState () {
@@ -9,7 +10,9 @@ var React = require('react'),
 
             return {
                 totalWeight: weightStates.totalWeight,
-                bbWeight: weightStates.bbWeight
+                bbWeight: weightStates.bbWeight,
+                listedWeights: weightStates.listedWeights,
+                allowedWeights: weightStates.allowedWeights
             }
         },
 
@@ -17,6 +20,21 @@ var React = require('react'),
             var currentState = this.state;
 
             currentState[event.target.id] = event.target.value;
+            this.setState(currentState);
+        },
+
+        onAllowedWeightsChange (event) {
+            var currentState = this.state,
+                selectedWeights = [],
+                weightInputs = document.getElementsByClassName('calculator-form__allowed-wieghts-input');
+
+            forEach(weightInputs, (weightInput) =>{
+                if (weightInput.checked){
+                    selectedWeights.push(parseFloat(weightInput.value));
+                }
+            });
+
+            currentState['allowedWeights'] = selectedWeights;
             this.setState(currentState);
         },
 
@@ -41,8 +59,31 @@ var React = require('react'),
         render () {
             return (
                 <div>
-                    <div className="calculator__form">
+                    <div className="calculator-form">
                         <h2>Calculate Plate Breakdown</h2>
+                        <div className="calculator-form__allowed-wieghts">
+                            <p>Available Plates (lbs):</p>
+                            {
+                                this.state.listedWeights.map((weight) => {
+                                    var inputName = "allowedWeights-" + weight;
+
+                                    return (
+                                        <div className="property property--checkbox">
+                                            <label htmlFor={inputName}>{weight}</label>
+                                            <input
+                                                id={inputName}
+                                                className="calculator-form__allowed-wieghts-input"
+                                                onChange={this.onAllowedWeightsChange}
+                                                name="allowedWeights[]"
+                                                checked={this.state.allowedWeights.indexOf(weight) >= 0}
+                                                type="checkbox"
+                                                value={weight}
+                                            />
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
                         <div className="property">
                             <label htmlFor="bbWeight">Enter Barbell Weight (lb): </label>
                             <div className="value">

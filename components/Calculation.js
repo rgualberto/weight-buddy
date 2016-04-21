@@ -1,25 +1,24 @@
 var React = require('react'),
     forEach = require('lodash/forEach'),
+    isEqual = require('lodash/isEqual'),
 
     Calculation = React.createClass({
         shouldComponentUpdate (nextProps, nextState) {
             var totalChanged = nextProps.totalWeight === this.props.totalWeight,
-                bbChanged = nextProps.bbWeight === this.props.bbWeight;
+                bbChanged = nextProps.bbWeight === this.props.bbWeight,
+                allowedChanged = isEqual(nextProps.allowedWeights, this.props.allowedWeights);
 
-            return totalChanged || bbChanged;
+            return totalChanged || bbChanged || allowedChanged;
         },
 
         propTypes: {
             totalWeight: React.PropTypes.number.isRequired,
-            bbWeight: React.PropTypes.number.isRequired
-        },
-
-        getAvailableWeights () {
-            return [45, 35, 25, 10, 5, 2.5];
+            bbWeight: React.PropTypes.number.isRequired,
+            allowedWeights: React.PropTypes.array
         },
 
         calculateWeights (totalWeight) {
-            var availableWeights = this.getAvailableWeights(),
+            var availableWeights = this.props.allowedWeights,
                 barWeight = this.props.bbWeight,
                 weightWithoutBar = totalWeight - barWeight,
                 finalWeights = [],
@@ -70,7 +69,7 @@ var React = require('react'),
             return (
                 <p>
                     Available Weights:
-                    <span className="calculation-messaging__result">{this.getAvailableWeights().join(', ')}</span>
+                    <span className="calculation-messaging__result">{this.props.allowedWeights.join(', ')}</span>
                     <br/>
 
                     Total Weight:
@@ -107,8 +106,8 @@ var React = require('react'),
                 calculation = this.buildWeightList(calculatedWeights.finalWeights);
                 messaging = (
                     <p className="calculation-messaging">
-                        <p>Place the following weights on each side of the barbell:</p>
                         {this.getStats(calculatedWeights.leftOverWeight)}
+                        <p>Place the following weights on each side of the barbell:</p>
                     </p>
                 );
             }

@@ -7,12 +7,15 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
 
     _currentWeightStates = {
         totalWeight: 0,
-        bbWeight: 45
+        bbWeight: 45,
+        listedWeights: [45, 35, 25, 10, 5, 2.5],
+        allowedWeights: [45, 35, 25, 10, 5, 2.5]
     },
 
     updateWeightStates = (weightState) => {
         _currentWeightStates.totalWeight = parseFloat(weightState.totalWeight);
         _currentWeightStates.bbWeight = parseFloat(weightState.bbWeight);
+        _currentWeightStates.allowedWeights = weightState.allowedWeights;
     },
 
     WeightsStore = {
