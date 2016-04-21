@@ -40,6 +40,7 @@ html {
 }
 
 .calculation-list {
+    padding: 0;
     list-style: none;
 }
 
@@ -71,3 +72,13 @@ html {
         width: 60px;
     }
 
+.calculation-messaging {}
+
+    .calculation-messaging__result {
+        padding-left: 10px;
+        font-size: 18px;
+    }
+
+        .calculation-messaging__result:after {
+            content: ' (lbs)';
+        }

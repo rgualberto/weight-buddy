@@ -45,7 +45,8 @@ var React = require('react'),
                             id="totalWeight"
                             onChange={this.onTextChange}
                             onKeyDown={this.onKeyDown}
-                            value={this.state.totalWeight}
+                            value={this.state.totalWeight === 0 ? null : this.state.totalWeight}
+                            placeholder={this.state.totalWeight}
                         />
                         <a
                             href="#"

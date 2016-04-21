@@ -86,7 +86,13 @@ var React = require('react'),
                 messaging = <p>Place the following weights on each side of the barbell:</p>;
 
                 if (calculatedWeights.status === 'leftOverWeight') {
-                    messaging = <p>{messaging}{this.statusMessage['leftOverWeight'] + ':' + calculatedWeights.leftOverWeight}</p>;
+                    messaging = (
+                        <p className="calculation-messaging">
+                            {messaging}
+                            {this.statusMessage['leftOverWeight'] + ':'}
+                            <span className="calculation-messaging__result">{calculatedWeights.leftOverWeight}</span>
+                        </p>
+                    );
                 }
             }
 

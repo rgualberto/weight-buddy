@@ -26,7 +26,7 @@ var React = require('react'),
 
         render () {
             return (
-                <div>
+                <div className="calculator">
                     <CalculatorForm />
                     <Calculation totalWeight={this.state.totalWeight} />
                 </div>
