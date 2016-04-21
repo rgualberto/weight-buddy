@@ -26,7 +26,6 @@ var React = require('react'),
 
         save (event) {
             if (isEmpty(this.state.totalWeight)) {
-                console.log(this.state.totalWeight);
                 return;
             }
             if (event.type === 'click') {
