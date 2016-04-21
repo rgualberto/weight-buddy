@@ -10,11 +10,6 @@ var React = require('react'),
             totalWeight: React.PropTypes.number.isRequired
         },
 
-        statusMessage: {
-            'invalidWeight': 'Weight entered is lower than or equal to the bar weight.',
-            'leftOverWeight': 'There was unaccounted for weight due to available weights'
-        },
-
         getAvailableWeights () {
             return [45, 35, 25, 10, 5, 2.5];
         },
@@ -45,7 +40,6 @@ var React = require('react'),
                 });
 
                 if (weightWithoutBar !== 0) {
-                    status = 'leftOverWeight';
                     leftOverWeight = weightWithoutBar;
                 }
             }
@@ -69,6 +63,34 @@ var React = require('react'),
             return weightList;
         },
 
+        getStats (leftOverWeight) {
+            var barWeight = this.getBarWeight(),
+                calculatedWeight = this.props.totalWeight - leftOverWeight;
+
+            return (
+                <p>
+                    Available Weights:
+                    <span className="calculation-messaging__result">{this.getAvailableWeights().join(', ')}</span>
+                    <br/>
+
+                    Total Weight:
+                    <span className="calculation-messaging__result">{this.props.totalWeight}</span>
+                    <br/>
+
+                    Barbell Weight:
+                    <span className="calculation-messaging__result">{barWeight}</span>
+                    <br/>
+
+                    Weight Not Added:
+                    <span className="calculation-messaging__result">{leftOverWeight}</span>
+                    <br/>
+
+                    Calculated Weight:
+                    <span className="calculation-messaging__result">{calculatedWeight}</span>
+                </p>
+            )
+        },
+
         render () {
             // escape if 0 weight given
             if (this.props.totalWeight === 0) { return false; }
@@ -79,21 +101,16 @@ var React = require('react'),
                 calculatedWeights = this.calculateWeights(this.props.totalWeight);
 
             if (calculatedWeights.status === 'invalidWeight') {
-                messaging = this.statusMessage['invalidWeight'];
+                messaging = 'Weight entered is lower than or equal to the bar weight.';
             }
             else {
                 calculation = this.buildWeightList(calculatedWeights.finalWeights);
-                messaging = <p>Place the following weights on each side of the barbell:</p>;
-
-                if (calculatedWeights.status === 'leftOverWeight') {
-                    messaging = (
-                        <p className="calculation-messaging">
-                            {messaging}
-                            {this.statusMessage['leftOverWeight'] + ':'}
-                            <span className="calculation-messaging__result">{calculatedWeights.leftOverWeight}</span>
-                        </p>
-                    );
-                }
+                messaging = (
+                    <p className="calculation-messaging">
+                        <p>Place the following weights on each side of the barbell:</p>
+                        {this.getStats(calculatedWeights.leftOverWeight)}
+                    </p>
+                );
             }
 
             return (
