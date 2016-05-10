@@ -20,6 +20,24 @@ html {
     }
 }
 
+.main-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .main-nav li {
+        display: inline-block;
+    }
+
+    .main-nav li + li {
+        padding-left: 15px;
+    }
+
+    .main-nav a {
+        color: #0E97D6;
+    }
+
 .calculator-form {}
 
     .calculator-form input {

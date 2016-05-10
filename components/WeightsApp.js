@@ -1,36 +1,17 @@
 var React = require('react'),
-    Calculation = require('./Calculation'),
-    CalculatorForm = require('./CalculatorForm'),
-    WeightsStore = require('../stores/WeightsStore'),
+    { Link } = require('react-router'),
 
     WeightsApp = React.createClass({
-        getInitialState () {
-            return WeightsStore.getWeightStates();
-        },
-
-        componentDidMount () {
-            WeightsStore.addChangeListener(this.handleStoreChange);
-        },
-
-        componentWillUnmount () {
-            WeightsStore.removeChangeListener(this.handleStoreChange);
-        },
-
-        handleStoreChange () {
-            this.setState(WeightsStore.getWeightStates());
-        },
-
         render () {
             return (
-                <div className="calculator">
-                    <CalculatorForm />
-                    <Calculation
-                        totalWeight={this.state.totalWeight}
-                        bbWeight={this.state.bbWeight}
-                        allowedWeights={this.state.allowedWeights}
-                    />
+                <div>
+                    <ul role="nav" className="main-nav">
+                        <li><Link to="/" onlyActiveOnIndex activeClassName="active">Calculator</Link></li>
+                        <li><Link to="/workout" activeClassName="active">Workout</Link></li>
+                    </ul>
+                    {this.props.children}
                 </div>
-            );
+            )
         }
     });
 
