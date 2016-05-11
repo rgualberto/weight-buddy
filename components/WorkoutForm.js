@@ -69,15 +69,17 @@ var React = require('react'),
                                     return (
                                         <div className="property property--checkbox">
                                             <label htmlFor={inputName}>{increment}</label>
-                                            <input
-                                                id={inputName}
-                                                className="workout-form__percentage-increment"
-                                                onChange={this.onIncrementsChange}
-                                                name="allowedIncrements[]"
-                                                checked={this.state.allowedIncrements.indexOf(increment) >= 0}
-                                                type="checkbox"
-                                                value={increment}
-                                            />
+                                            <div className="value">
+                                                <input
+                                                    id={inputName}
+                                                    className="workout-form__percentage-increment"
+                                                    onChange={this.onIncrementsChange}
+                                                    name="allowedIncrements[]"
+                                                    checked={this.state.allowedIncrements.indexOf(increment) >= 0}
+                                                    type="checkbox"
+                                                    value={increment}
+                                                />
+                                            </div>
                                         </div>
                                     );
                                 })
@@ -96,6 +98,7 @@ var React = require('react'),
                             </div>
                         </div>
                         <a
+                            className="submit-button"
                             href="#"
                             onClick={this.save}
                         >Submit</a>

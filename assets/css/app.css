@@ -51,18 +51,6 @@ html {
         border: 0;
     }
 
-    .calculator-form a {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 4px 10px;
-        color: black;
-        font-size: 18px;
-        text-decoration: none;
-        background: #FFFFFF;
-        border: 3px solid #2B7090;
-        border-radius: 5px;
-    }
-
     .calculator-form__allowed-wieghts {
         display: block;
         margin: 0 auto;
@@ -137,6 +125,43 @@ html {
             content: ' (lbs)';
         }
 
+.workout-form__percentage-increments {}
+
+    .workout-form__percentage-increments .property {
+        width: 25%;
+        float: left;
+    }
+
+        .workout-form__percentage-increments .property label {
+            width: auto;
+        }
+
+        .workout-form__percentage-increments .property label:after {
+            content: '%';
+        }
+
+.workout-routine {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+    .workout-routine th,
+    .workout-routine td {
+        padding: 10px 20px;
+    }
+
+    .workout-routine tr + tr th,
+    .workout-routine tr + tr td {
+        border-top: 1px solid #A7A1A1;
+    }
+
+    .workout-routine th {
+        width: 40px;
+        width: 40px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    .workout-routine td {}
+
 .property {
     display: table;
     margin: 0 auto 15px;
@@ -150,3 +175,15 @@ html {
     .property .value {
         display: table-cell;
     }
+
+.submit-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 4px 10px;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    background: #FFFFFF;
+    border: 3px solid #2B7090;
+    border-radius: 5px;
+}

@@ -49,8 +49,14 @@ var React = require('react'),
 
             return (
                 <div>
-                    <table>
-                        <tbody>{workoutRows}</tbody>
+                    <table className="workout-routine">
+                        <tbody>
+                            <tr>
+                                <th>Increments</th>
+                                <td>Weight</td>
+                            </tr>
+                            {workoutRows}
+                        </tbody>
                     </table>
                 </div>
             );

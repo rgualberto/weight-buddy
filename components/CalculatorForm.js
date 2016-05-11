@@ -108,6 +108,7 @@ var React = require('react'),
                             </div>
                         </div>
                         <a
+                            className="submit-button"
                             href="#"
                             onClick={this.save}
                         >Submit</a>
