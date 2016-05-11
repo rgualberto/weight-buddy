@@ -40,7 +40,7 @@ var React = require('react'),
 
         render () {
             // escape if 0 weight given
-            if (this.props.rmWeight === 0) { return false; }
+            if (this.props.rmWeight === 0 || this.props.allowedIncrements.length === 0) { return false; }
 
             var workoutRows = '',
                 calculatedWorkout = this.calculateWorkout();
