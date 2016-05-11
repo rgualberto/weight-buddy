@@ -140,6 +140,29 @@ html {
             content: '%';
         }
 
+    .workout-form__quick-tabs {
+        margin-bottom: 20px;
+    }
+
+        .workout-form__quick-tabs a {
+            padding: 6px 10px;
+            font-size: 13px;
+            text-decoration: none;
+            background: white;
+            border: 1px solid #2B7090;
+            border-radius: 5px;
+        }
+
+        @media (min-width: 700px) {
+            .workout-form__quick-tabs a {
+                font-size: 16px;
+            }
+        }
+
+        .workout-form__quick-tabs a + a {
+            margin-left: 10px;
+        }
+
 .workout-routine {
     margin: 20px auto;
     border-collapse: collapse;

@@ -15,6 +15,42 @@ var React = require('react'),
             }
         },
 
+        selectInputs (type) {
+            event.preventDefault();
+
+            var currentState = this.state,
+                listedIncrements = currentState.listedIncrements,
+                allowedIncrements = [];
+
+            switch (type) {
+                case 'all':
+                    allowedIncrements = listedIncrements;
+                    break;
+
+                case 10:
+                    for (var i=0; i < listedIncrements.length; i++) {
+                        if (listedIncrements[i]%10 === 0) {
+                            allowedIncrements.push(listedIncrements[i]);
+                        }
+                    }
+                    break;
+
+                case 5:
+                    for (var i=0; i < listedIncrements.length; i++) {
+                        if (listedIncrements[i]%10 === 5) {
+                            allowedIncrements.push(listedIncrements[i]);
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            currentState['allowedIncrements'] = allowedIncrements;
+            this.setState(currentState);
+        },
+
         onTextChange (event) {
             var currentState = this.state;
 
@@ -62,6 +98,24 @@ var React = require('react'),
                         <h2>Calculate Routine</h2>
                         <div className="workout-form__percentage-increments">
                             <p>Percentage Increments (%):</p>
+                            <div className="workout-form__quick-tabs">
+                                <a
+                                    href="#"
+                                    onClick={this.selectInputs.bind(this, 'all')}
+                                >Select All</a>
+                                <a
+                                    href="#"
+                                    onClick={this.selectInputs.bind(this, '')}
+                                >Deselect All</a>
+                                <a
+                                    href="#"
+                                    onClick={this.selectInputs.bind(this, 10)}
+                                >10's</a>
+                                <a
+                                    href="#"
+                                    onClick={this.selectInputs.bind(this, 5)}
+                                >5's</a>
+                            </div>
                             {
                                 this.state.listedIncrements.map((increment) => {
                                     var inputName = "increment-" + increment;
